@@ -1,6 +1,16 @@
 class PropertiesController < ApplicationController
   before_action :set_property, only: [:show, :edit, :update, :destroy]
 
+  swagger_controller :properties, "Property Management"
+
+  swagger_api :show do
+    summary "Fetches a single Property item"
+    param :path, :id, :integer, :optional, "User Id"
+    response :ok, "Success", :User
+    response :unauthorized
+    response :not_acceptable
+    response :not_found
+  end
   # GET /properties
   # GET /properties.json
   def index
